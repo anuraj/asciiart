@@ -2,6 +2,8 @@
 
 ASCII Art is a dotnet command line tool helps to generate ASCII banners.
 
+[![Publish NuGet Package](https://github.com/anuraj/asciiart/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/anuraj/asciiart/actions/workflows/main.yml) ![Nuget](https://img.shields.io/nuget/v/asciiart) ![Nuget Downloads](https://img.shields.io/nuget/dt/asciiart)
+
 You can install it using `dotnet install tool -g asciiart`.
 
 Once installed, you can run the tool using `asciiart` command from command line or powershell window.
