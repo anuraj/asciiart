@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ToolCommandName>asciiart</ToolCommandName>
+    <PackAsTool>true</PackAsTool>
+    <Title>ASCII Art</Title>
+    <Authors>Anuraj</Authors>
+    <Company>dotnetthoughts</Company>
+    <Description>A Sample dotnet global tool for building ASCII art</Description>
+    <Summary>A Sample dotnet global tool for building ASCII art</Summary>
+    <Copyright>Copyright © dotnetthoughts. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/anuraj/asciiart</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/anuraj/asciiart</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>.NET Core,ASCII Art</PackageTags>
+    <license>MIT</license>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Version Condition="'$(BUILD_VERSION)' == ''">1.0.0</Version>
+    <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+     <PackageIcon>asciiart.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include=".\asciiart.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+	<None Include=".\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Figgle" Version="0.4.1" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+</Project>
