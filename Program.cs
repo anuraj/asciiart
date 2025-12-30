@@ -2,15 +2,22 @@
 using Figgle;
 using System;
 using System.Linq;
+using Figgle.Fonts;
 
 if (args.Length == 0)
 {
-    args = new[] { "--help" };
+    args = ["--help"];
 }
 
-var textArgument = new Argument<string>("text", "The text to generate ASCII art");
-var fontOption = new Option<string>(new[] { "--font", "-f" }, () => "Standard", "The font to use for the ASCII art. For more information, see https://github.com/drewnoakes/figgle");
-var randomFontOption = new Option<bool>(new[] { "--random-font", "-r" }, "Use a random font for the ASCII art");
+var textArgument = new Argument<string>("text") { Description = "The text to generate ASCII art" };
+var fontOption = new Option<string>("--font", ["-f"])
+{
+    Description = "The font to use for the ASCII art. For more information, see https://github.com/drewnoakes/figgle"
+};
+var randomFontOption = new Option<bool>("--random-font", ["-r"])
+{
+    Description = "Use a random font for the ASCII art"
+};
 
 var rootCommand = new RootCommand("A dotnet tool to generate ASCII art using the Figgle library. Find more information about the Figgle library at https://github.com/drewnoakes/figgle")
 {
@@ -19,9 +26,12 @@ var rootCommand = new RootCommand("A dotnet tool to generate ASCII art using the
     randomFontOption
 };
 
-rootCommand.Name = "asciiart";
-rootCommand.SetHandler((text, font, useRandomFont) =>
+rootCommand.SetAction((result) =>
 {
+    var text = result.GetRequiredValue(textArgument);
+    var font = result.GetValue(fontOption);
+    var useRandomFont = result.GetValue(randomFontOption);
+
     var figgleFont = FiggleFonts.Standard;
     if (useRandomFont)
     {
@@ -45,10 +55,9 @@ rootCommand.SetHandler((text, font, useRandomFont) =>
     {
         RenderText(text!, figgleFont);
     }
+});
 
-}, textArgument, fontOption, randomFontOption);
-
-return await rootCommand.InvokeAsync(args);
+return rootCommand.Parse(args).Invoke();
 
 static void RenderText(string text, FiggleFont figgleFont)
 {
