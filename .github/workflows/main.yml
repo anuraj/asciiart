@@ -24,7 +24,13 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 10.0.x
-
+      - name: Analyze Code with Azure OpenAI
+        uses: anuraj/code-analysis@v1
+        with:
+          repository: ${{ github.repository }}
+          azure_openai_endpoint: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          azure_openai_key: ${{ secrets.AZURE_OPENAI_KEY }}
+          azure_openai_deployment: 'gpt-5-nano'
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
